@@ -1,0 +1,13 @@
+[
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields":{
+            "game": 1,
+            "description": "Fun Game of Monopoly",
+            "date": "2020-01-03",
+            "time": "04:04",
+            "organizer": 1
+        }
+    }
+]
