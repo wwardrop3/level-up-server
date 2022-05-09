@@ -20,7 +20,7 @@ router = routers.DefaultRouter(trailing_slash = False)
 # THESE ARE THE ENDPOINTS
 router.register(r'gametypes', GameTypeView, 'gametype')
 router.register(r'games', GameView, 'game')
-router.register(r'events', EventView, 'events')
+router.register(r'events', EventView, 'event')
 
 
 

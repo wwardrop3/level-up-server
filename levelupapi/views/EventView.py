@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from levelupapi.models import Event, event
 from django.http import HttpResponseServerError
+from levelupapi.models import gamer
 from levelupapi.models.game import Game
 from django.core.exceptions import ValidationError
 from levelupapi.models.gamer import Gamer
@@ -24,7 +25,7 @@ class EventSerializer(serializers.ModelSerializer):
         # model to use
         model = Event
         # columns of model to return
-        fields = ('id', 'game', 'description', 'date', 'time', 'organizer', 'attendees')
+        fields = ('id', 'game', 'description', 'date', 'time', 'organizer', 'attendees', 'joined')
     
 
 class UpdateEventSerializer(serializers.ModelSerializer):
@@ -33,7 +34,7 @@ class UpdateEventSerializer(serializers.ModelSerializer):
         
         # this is specifying which parts of the python model we want to return or update or create
         # maybe we only want to update a few things
-        fields = ['id', 'game', 'description', 'date', 'time']
+        fields = ['id', 'game', 'description', 'date', 'time', "organizer"]
 
 
 
@@ -66,8 +67,14 @@ class EventView(ViewSet):
     
     def list(self, request):
         
-        event = Event.objects.all()
-        serializer = EventSerializer(event, many= True)
+        events = Event.objects.all()
+        gamer = Gamer.objects.get(user = request.auth.user)
+        # Set the `joined` property on every event
+        for event in events:
+            # Check to see if the gamer is in the attendees list on the event/////returns true/false
+            event.joined = gamer in event.attendees.all()
+            
+        serializer = EventSerializer(events, many= True)
         
         return Response(serializer.data)
     

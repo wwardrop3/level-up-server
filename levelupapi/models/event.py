@@ -9,14 +9,13 @@ class Event(models.Model):
     time = models.TimeField()
     organizer = models.ForeignKey("Gamer", on_delete=models.CASCADE)
     attendees = models.ManyToManyField("Gamer", related_name="Gamers")
+
     
     # custom properties do not exist in the database but bul calculate when the request is made
+    
     @property
-    # how you get the data
     def joined(self):
         return self.__joined
-    # how you set the data
     @joined.setter
     def joined(self, value):
         self.__joined = value
-# 
