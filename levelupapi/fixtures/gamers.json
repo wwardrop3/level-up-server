@@ -6,5 +6,21 @@
             "user": 1,
             "bio": "Me"
         }
+    },
+    {
+        "model": "levelupapi.gamer",
+        "pk": 4,
+        "fields": {
+            "user": 4,
+            "bio": "Other 1"
+        }
+    },
+    {
+        "model": "levelupapi.gamer",
+        "pk": 5,
+        "fields": {
+            "user": 5,
+            "bio": "Other 2"
+        }
     }
 ]

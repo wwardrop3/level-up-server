@@ -30,7 +30,8 @@ urlpatterns = [
     path('login', login_user),
     path('admin/', admin.site.urls),
     # if the route is not one of the built in routes above, look to the ones definied outside of the url patterns
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('', include('levelupreports.urls'))
 ]
 
 # endpoint are where resources are pointing to
